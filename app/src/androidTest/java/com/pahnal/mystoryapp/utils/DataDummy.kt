@@ -14,19 +14,6 @@ object DataDummy {
         )
     }
 
-    fun generateRegisterErrorInvalidEmail(): BasicResponseDto {
-        return BasicResponseDto(
-            error = true,
-            message = "\"email\" must be a valid email",
-        )
-    }
-    fun generateRegisterErrorEmailAlreadyTaken(): BasicResponseDto {
-        return BasicResponseDto(
-            error = true,
-            message = "Email is already taken",
-        )
-    }
-
     fun generateDummyLoginSuccess(): LoginResponseDto {
         return LoginResponseDto(
             error = false,
@@ -39,38 +26,11 @@ object DataDummy {
         )
     }
 
-    fun generateDummyLoginErrorInvalidPassword(): BasicResponseDto {
-        return BasicResponseDto(
-            error = true,
-            message = "Invalid password",
-        )
-    }
-
-    fun generateDummyLoginErrorUserNotFound(): BasicResponseDto {
-        return BasicResponseDto(
-            error = true,
-            message = "User not found",
-        )
-    }
-
-    fun generateDummyLoginErrorInvalidEmail(): BasicResponseDto {
-        return BasicResponseDto(
-            error = true,
-            message = "\"email\" must be a valid email",
-        )
-    }
 
     fun generateAddStorySuccess(): BasicResponseDto {
         return BasicResponseDto(
             error = false,
             message = "success",
-        )
-    }
-
-    fun generateAddStoryError(): BasicResponseDto {
-        return BasicResponseDto(
-            error = true,
-            message = "Error Add Story",
         )
     }
 
@@ -92,7 +52,7 @@ object DataDummy {
         )
     }
 
-    fun generateDummyStories(): List<Story> {
+    private fun generateDummyStories(): List<Story> {
         val items: ArrayList<Story> = arrayListOf()
         for (i in 0..100) {
             val story = Story(

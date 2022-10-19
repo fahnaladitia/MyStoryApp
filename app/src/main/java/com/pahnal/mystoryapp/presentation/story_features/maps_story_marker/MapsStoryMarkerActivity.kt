@@ -1,9 +1,9 @@
 package com.pahnal.mystoryapp.presentation.story_features.maps_story_marker
 
-import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.CancelableCallback
@@ -16,7 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.pahnal.mystoryapp.R
 import com.pahnal.mystoryapp.databinding.ActivityMapsStoryMarkerBinding
 import com.pahnal.mystoryapp.databinding.MainToolbarBinding
-import com.pahnal.mystoryapp.domain.model.Story
+import com.pahnal.mystoryapp.utils.ViewModelFactory
 import com.pahnal.mystoryapp.utils.goBack
 
 
@@ -26,6 +26,10 @@ class MapsStoryMarkerActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsStoryMarkerBinding
     private var toolbar: MainToolbarBinding? = null
     private var boundsBuilder = LatLngBounds.Builder()
+    private val viewModel by lazy {
+        val factory = ViewModelFactory.getInstance(application)
+        ViewModelProvider(this, factory)[MapsStoryMarkerViewModel::class.java]
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,25 +101,22 @@ class MapsStoryMarkerActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun setMarkerFromListStories() {
-        val extras = intent.extras
-        val stories = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            extras?.getParcelableArrayList(EXTRA_STORY_LIST, Story::class.java)
-        } else {
-            extras?.getParcelableArrayList(EXTRA_STORY_LIST)
-        }
-        stories?.forEach { story ->
-            story.latLng()?.let { latLng ->
-                mMap.addMarker(
-                    MarkerOptions()
-                        .position(latLng)
-                        .title(story.name)
-                        .snippet(story.description)
-                )
-                boundsBuilder.include(latLng)
+        viewModel.getAllStories().observe(this) { stories ->
+            stories?.forEach { story ->
+                story.latLng()?.let { latLng ->
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(latLng)
+                            .title(story.name)
+                            .snippet(story.description)
+                    )
+                    boundsBuilder.include(latLng)
+                }
             }
+            if (stories?.isEmpty() == true) return@observe
+            mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 64))
         }
-        if (stories?.isEmpty() == true) return
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 64))
+
     }
 
     override fun onDestroy() {

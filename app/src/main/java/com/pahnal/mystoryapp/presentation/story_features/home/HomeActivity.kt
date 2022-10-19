@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private val viewModel by lazy {
-        val factory = ViewModelFactory.getInstance()
+        val factory = ViewModelFactory.getInstance(application)
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
     private var toolbar: MainToolbarBinding? = null
@@ -86,10 +86,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> dialogAlertConfirmLogout()
-            R.id.maps_story -> this.goToWithDataParcelizeList(
+            R.id.maps_story -> this.goTo(
                 MapsStoryMarkerActivity::class.java,
-                MapsStoryMarkerActivity.EXTRA_STORY_LIST,
-                storyList,
             )
         }
         return super.onOptionsItemSelected(item)
@@ -151,7 +149,7 @@ class HomeActivity : AppCompatActivity() {
             Pair(itemBinding.storyDescription, "story_description"),
         ).toBundle()
         val intent = Intent(this, StoryDetailActivity::class.java)
-        intent.putExtra(StoryDetailActivity.EXTRA_STORY, story)
+        intent.putExtra(StoryDetailActivity.EXTRA_STORY_ID, story.id)
         startActivity(intent, options)
     }
 

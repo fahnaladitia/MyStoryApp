@@ -43,12 +43,12 @@ class HomeViewModelTest {
         val data: PagingData<Story> = FakeStoryPagingSource.snapshot(dummyStory)
         val expectedStory = MutableLiveData<PagingData<Story>>()
         expectedStory.value = data
-        Mockito.`when`(myRepository.getAllStoriesPagingStory("")).thenReturn(expectedStory)
+        Mockito.`when`(myRepository.getAllStoriesRemoteMediator("")).thenReturn(expectedStory)
         val storyRepository: IStoryRepository = myRepository
         val homeViewModel = HomeViewModel(storyRepository)
 
         val actualStory: PagingData<Story> = homeViewModel.listStories("").getOrAwaitValue()
-        Mockito.verify(myRepository).getAllStoriesPagingStory("")
+        Mockito.verify(myRepository).getAllStoriesRemoteMediator("")
         val differ = AsyncPagingDataDiffer(
             diffCallback = ListStoryAdapter.DIFF_CALLBACK,
             updateCallback = noopListUpdateCallback,
@@ -67,12 +67,12 @@ class HomeViewModelTest {
         val data: PagingData<Story> = FakeStoryPagingSource.snapshot(listOf())
         val expectedStory = MutableLiveData<PagingData<Story>>()
         expectedStory.value = data
-        Mockito.`when`(myRepository.getAllStoriesPagingStory("")).thenReturn(expectedStory)
+        Mockito.`when`(myRepository.getAllStoriesRemoteMediator("")).thenReturn(expectedStory)
         val storyRepository: IStoryRepository = myRepository
         val homeViewModel = HomeViewModel(storyRepository)
 
         val actualStory: PagingData<Story> = homeViewModel.listStories("").getOrAwaitValue()
-        Mockito.verify(myRepository).getAllStoriesPagingStory("")
+        Mockito.verify(myRepository).getAllStoriesRemoteMediator("")
         val differ = AsyncPagingDataDiffer(
             diffCallback = ListStoryAdapter.DIFF_CALLBACK,
             updateCallback = noopListUpdateCallback,

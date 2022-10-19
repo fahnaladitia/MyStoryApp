@@ -37,7 +37,7 @@ class AddStoryActivity : AppCompatActivity() {
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private lateinit var currentPhotoPath: String
     private val viewModel by lazy {
-        val factory = ViewModelFactory.getInstance()
+        val factory = ViewModelFactory.getInstance(application)
         ViewModelProvider(this, factory)[AddStoryViewModel::class.java]
     }
     private val userLogin = DataPref.getUser(this).asLiveData()

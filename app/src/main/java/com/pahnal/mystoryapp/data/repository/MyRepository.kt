@@ -1,13 +1,12 @@
 package com.pahnal.mystoryapp.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.liveData
+import androidx.paging.*
 import com.pahnal.mystoryapp.data.mapper.toDomain
 import com.pahnal.mystoryapp.data.mapper.toDto
-import com.pahnal.mystoryapp.data.paginator.StoryPagingSource
+import com.pahnal.mystoryapp.data.paginator.StoryRemoteMediator
+import com.pahnal.mystoryapp.data.source.local.dao.StoryDao
+import com.pahnal.mystoryapp.data.source.local.room.StoryDatabase
 import com.pahnal.mystoryapp.data.source.remote.network.ApiService
 import com.pahnal.mystoryapp.data.vo.Resource
 import com.pahnal.mystoryapp.domain.model.*
@@ -22,9 +21,13 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
-class MyRepository(
+@OptIn(ExperimentalPagingApi::class)
+open class MyRepository(
+    private val database: StoryDatabase,
     private val apiService: ApiService,
 ) : IAuthRepository, IStoryRepository {
+
+    open fun storyDao(): StoryDao = database.storyDao()
 
     override suspend fun login(login: LoginRequest): Flow<Resource<User>> = flow {
         emit(Resource.Loading())
@@ -57,18 +60,26 @@ class MyRepository(
         }
     }
 
-    override fun getAllStoriesPagingStory(token: String?): LiveData<PagingData<Story>> {
+    override fun getAllStoriesFromDatabase(): LiveData<List<Story>> {
+        return storyDao().getAllStories()
+    }
+
+    override fun getStoryById(id: String): LiveData<Story> {
+        return storyDao().getStoryById(id)
+    }
+
+    override fun getAllStoriesRemoteMediator(token: String?): LiveData<PagingData<Story>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 5,
                 initialLoadSize = 5,
             ),
+            remoteMediator = StoryRemoteMediator(database, apiService, token),
             pagingSourceFactory = {
-                StoryPagingSource(apiService, token)
+                storyDao().getAllStory()
             },
         ).liveData
     }
-
 
     override suspend fun addStory(
         file: MultipartBody.Part,
@@ -102,9 +113,9 @@ class MyRepository(
         private var INSTANCE: MyRepository? = null
 
         @JvmStatic
-        fun getInstance(apiService: ApiService): MyRepository {
+        fun getInstance(database: StoryDatabase, apiService: ApiService): MyRepository {
             INSTANCE ?: synchronized(this::class.java) {
-                INSTANCE = MyRepository(apiService)
+                INSTANCE = MyRepository(database, apiService)
             }
             return INSTANCE as MyRepository
         }

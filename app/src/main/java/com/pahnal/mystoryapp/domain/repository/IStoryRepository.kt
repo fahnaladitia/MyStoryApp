@@ -10,5 +10,7 @@ import okhttp3.MultipartBody
 
 interface IStoryRepository {
     suspend fun addStory(file: MultipartBody.Part, addStory: AddStory,token: String?): Flow<Resource<String>>
-    fun getAllStoriesPagingStory(token: String?): LiveData<PagingData<Story>>
+    fun getAllStoriesRemoteMediator(token: String?): LiveData<PagingData<Story>>
+    fun getAllStoriesFromDatabase(): LiveData<List<Story>>
+    fun getStoryById(id: String): LiveData<Story>
 }

@@ -13,7 +13,7 @@ import com.pahnal.mystoryapp.utils.toast
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel by lazy {
-        val factory = ViewModelFactory.getInstance()
+        val factory = ViewModelFactory.getInstance(application)
         ViewModelProvider(this, factory)[RegisterViewModel::class.java]
     }
 

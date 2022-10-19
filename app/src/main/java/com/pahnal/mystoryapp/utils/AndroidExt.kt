@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 fun String.convertTimeStampToDisplay(format: String = "EEEE, dd MMM yyyy"): String {
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
@@ -32,15 +31,6 @@ fun <T> Activity.goTo(clazz: Class<T>, isFinished: Boolean = false) {
 
 fun Activity.toast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
-
-fun <T, V : Parcelable> Activity.goToWithDataParcelizeList(
-    clazz: Class<T>, key: String, data: ArrayList<V>, isFinished: Boolean = false
-) {
-    val intent = Intent(this, clazz)
-    intent.putParcelableArrayListExtra(key, data)
-    startActivity(intent)
-    if (isFinished) finish()
 }
 
 fun ComponentActivity.goBack() = onBackPressedDispatcher.onBackPressed()

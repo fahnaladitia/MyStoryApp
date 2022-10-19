@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel by lazy {
-        val factory = ViewModelFactory.getInstance()
+        val factory = ViewModelFactory.getInstance(application)
         ViewModelProvider(this, factory)[LoginViewModel::class.java]
     }
 

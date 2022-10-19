@@ -6,7 +6,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.pahnal.mystoryapp.R
 import com.pahnal.mystoryapp.databinding.ItemStoryBinding
 import com.pahnal.mystoryapp.domain.model.Story
@@ -22,7 +21,6 @@ class ListStoryAdapter : PagingDataAdapter<Story, ListStoryAdapter.ListStoryView
         fun bind(story: Story) {
             with(binding) {
                 Glide.with(itemView.context).load(story.photoUrl).centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
                     .error(R.drawable.ic_baseline_broken_image_24).into(storyPhoto)
 
                 storyDate.text = story.createdAt.convertTimeStampToDisplay()

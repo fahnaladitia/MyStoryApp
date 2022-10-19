@@ -1,80 +1,111 @@
+UNIT TEST
+
 1. MyRepository
 	A. Ketika Login Harus Sukses
-       * Memastikan data tidak null
-       * Memastikan data loginResult sesuai dengan yang diharapkan
-       * Memastikan data userId sesuai dengan yang diharapkan
+	* Memastikan data tidak null
+	* Memastikan data flow pertama bernilai state loading
+	* Memastikan data flow terakhir bernilai state success
+      	* Memastikan data sesuai dengan yang diharapkan
+       	* Memastikan data userId sesuai dengan yang diharapkan
 
 	B. Ketika Register Harus Sukses
-       * Memastikan data tidak null
-       * Memastikan data message sesuai dengan yang diharapkan
-       * Memastikan data error bernilai False
+       	* Memastikan data tidak null
+	* Memastikan data flow pertama bernilai state loading
+	* Memastikan data flow terakhir bernilai state success
+      	* Memastikan data sesuai dengan yang diharapkan
 
-	C. Ketika Mendapatkan Semua Cerita Harus Sukses
-       * Memastikan data tidak null
-       * Memastikan data message sesuai dengan yang diharapkan
-       * Memastikan jumlah data listStory sesuai dengan yang diharapkan
-       * Memastikan data pertama id story sesuai dengan yang diharapkan
+	C. Ketika Tambah Cerita Harus Sukses
+       	* Memastikan data tidak null
+	* Memastikan data flow pertama bernilai state loading
+	* Memastikan data flow terakhir bernilai state success
+	* Memastikan data message dengan yang diharapkan
 
-	D. Ketika Tambah Cerita Harus Sukses
-       * Memastikan data tidak null
-       * Memastikan data message sesuai dengan yang diharapkan
-       * Memastikan data error bernilai false
+	D. Ketika Memanggil Get All Stories Dari database mengembalikan daftar story
+       	* Memastikan data tidak null
+       	* Memastikan data size sesuai dengan yang diharapkan
+      	* Memastikan data id story urutan pertama sesuai dengan yang diharapkan
+
+	E. Get Story By Id Harus Mengembalikan Single Story
+	* Memastikan data tidak null
+       	* Memastikan data sesuai dengan yang diharapkan
+       	* Memastikan data id story sesuai dengan yang diharapkan
 
 2. LoginViewModelTest
 	A. Ketika Login Berhasil, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText bernilai empty
-       * Memastikan data data successLogin sesuai dengan yang diharapkan
-       * Memastikan data userId sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText bernilai empty
+       	* Memastikan data data successLogin sesuai dengan yang diharapkan
+       	* Memastikan data userId sesuai dengan yang diharapkan
 
 	B. Ketika Login Error Pengguna Tidak Ditemukan, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText tidak null
-       * Memastikan data errorText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText tidak null
+       	* Memastikan data errorText sesuai dengan yang diharapkan
 
 	C. Ketika Login Error Email tidak valid, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText tidak null
-       * Memastikan data errorText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText tidak null
+       	* Memastikan data errorText sesuai dengan yang diharapkan
 
 	D. Ketika Login Error Password tidak valid, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText tidak null
-       * Memastikan data errorText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText tidak null
+       	* Memastikan data errorText sesuai dengan yang diharapkan
 
 3. RegisterViewModelTest
 	A. Ketika Register Berhasil, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText bernilai empty
-       * Memastikan data successText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText bernilai empty
+       	* Memastikan data successText sesuai dengan yang diharapkan
 
 	B. Ketika Register Error Email tidak valid, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText tidak null
-       * Memastikan data errorText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText tidak null
+       	* Memastikan data errorText sesuai dengan yang diharapkan
 
 	C. Ketika Register Error Email sudah ada yang punya, LiveData dalam kondisi yang benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText tidak null
-       * Memastikan data errorText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText tidak null
+       	* Memastikan data errorText sesuai dengan yang diharapkan
 
 4. AddStoryViewModelTest
 	A. Ketika Add Story Sukses, LiveData dalam kondisi benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText bernilai empty
-       * Memastikan data isSuccess bernilai True
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText bernilai empty
+       	* Memastikan data isSuccess bernilai True
 
 	B. Ketika Add Story Error, LiveData dalam kondisi benar
-       * Memastikan IsLoading bernilai False
-       * Memastikan data errorText tidak null
-       * Memastikan data errorText sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data errorText tidak null
+       	* Memastikan data errorText sesuai dengan yang diharapkan
 
 5. HomeViewModelTest
 	A. Ketika memuat daftar Cerita Harus Tidak Null dan return sukses
-       * Memastikan IsLoading bernilai False
-       * Memastikan data snapshot list story sesuai dengan yang diharapkan
-       * Memastikan jumlah data snapshot list story sesuai dengan yang diharapkan
-       * Memastikan data pertama id story sesuai dengan yang diharapkan
+       	* Memastikan IsLoading bernilai False
+       	* Memastikan data snapshot list story sesuai dengan yang diharapkan
+       	* Memastikan jumlah data snapshot list story sesuai dengan yang diharapkan
+       	* Memastikan data pertama id story sesuai dengan yang diharapkan
 
 	B. Ketika memuat daftar Cerita mengembalikan list Kosong
-       * Memastikan jumlah data snapshot list story berjumlah kosong
+       	* Memastikan jumlah data snapshot list story berjumlah kosong
+
+6. MapsStoryMarkerViewModelTest
+	A. Ketika memuat Semua Cerita dari Database harus mengembalikan Daftar Cerita
+	* Memastikan data tidak null
+       	* Memastikan data size sesuai dengan yang diharapkan
+      	* Memastikan data id story urutan pertama sesuai dengan yang diharapkan
+
+7. StoryDetailViewModelTest
+	A. Ketika Get Story By Id mengembali Satu Story
+	* Memastikan data tidak null
+       	* Memastikan data sesuai dengan yang diharapkan
+       	* Memastikan data id story sesuai dengan yang diharapkan
+	
+
+ANDROID TEST
+
+1. StoryRemoteMediatorTest
+	
+	A. refresh Muat Kembalikan Hasil Sukses Saat Lebih Banyak Data Hadir
+	* Memastikan fungsi load mengembalikan RemoteMediator.MediatorResult.Success
+	* Memastikan jumlah endOfPaginationReached bernilai false

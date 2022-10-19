@@ -11,5 +11,5 @@ import com.pahnal.mystoryapp.domain.repository.IStoryRepository
 class HomeViewModel(private val storyRepository: IStoryRepository) : ViewModel() {
 
     fun listStories(token: String): LiveData<PagingData<Story>> =
-        storyRepository.getAllStoriesPagingStory(token).cachedIn(viewModelScope)
+        storyRepository.getAllStoriesRemoteMediator(token).cachedIn(viewModelScope)
 }
