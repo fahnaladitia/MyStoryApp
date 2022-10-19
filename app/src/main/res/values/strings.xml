@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">My Story App</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="greeting_login">Welcome Back,</string>
+    <string name="name">Name</string>
+    <string name="login">Login</string>
+    <string name="not_have_account">Don\'t have an account?</string>
+    <string name="logo_shield">Logo shield dicoding</string>
+    <string name="create_your_account">Create your account,</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="is_required">"%1$s" is required</string>
+    <string name="loading">Loading…</string>
+    <string name="success_login">Login Success</string>
+    <string name="story_image">Story Image</string>
+    <string name="add_story_button">Add Story Button</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="upload">Upload</string>
+    <string name="logout">Logout</string>
+    <string name="choose_picture">Choose a picture</string>
+    <string name="enter_description">Enter description</string>
+    <string name="description" translatable="false">description</string>
+    <string name="success_create_story">Success create new story</string>
+    <string name="add_story">Add Story</string>
+    <string name="story_detail">Story Detail</string>
+    <string name="story">Story</string>
+    <string name="empty">EMPTY</string>
+    <string name="access_camera_denied">Access denied, please change Camera permission to allow for this features</string>
+    <string name="preview_image">Preview Image</string>
+    <string name="app_dir" translatable="false">com.pahnal.mystoryapp</string>
+    <string name="email_validation_error">must be valid email address</string>
+    <string name="password_validation_error">must be at least 6 characters</string>
+    <string name="confirm_logout">Confirmation Logout</string>
+    <string name="confirm_logout_message">Are you sure want to logout?</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="maps_story">Maps Stories</string>
+    <string name="story_mark">Story Mark</string>
+    <string name="retry">Retry</string>
+    <string name="error_message_input_image">Please input your image</string>
+    <string name="please_try_login">Your Token is invalid, please try to login again</string>
+</resources>

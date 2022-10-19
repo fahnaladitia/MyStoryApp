@@ -1,0 +1,80 @@
+1. MyRepository
+	A. Ketika Login Harus Sukses
+       * Memastikan data tidak null
+       * Memastikan data loginResult sesuai dengan yang diharapkan
+       * Memastikan data userId sesuai dengan yang diharapkan
+
+	B. Ketika Register Harus Sukses
+       * Memastikan data tidak null
+       * Memastikan data message sesuai dengan yang diharapkan
+       * Memastikan data error bernilai False
+
+	C. Ketika Mendapatkan Semua Cerita Harus Sukses
+       * Memastikan data tidak null
+       * Memastikan data message sesuai dengan yang diharapkan
+       * Memastikan jumlah data listStory sesuai dengan yang diharapkan
+       * Memastikan data pertama id story sesuai dengan yang diharapkan
+
+	D. Ketika Tambah Cerita Harus Sukses
+       * Memastikan data tidak null
+       * Memastikan data message sesuai dengan yang diharapkan
+       * Memastikan data error bernilai false
+
+2. LoginViewModelTest
+	A. Ketika Login Berhasil, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText bernilai empty
+       * Memastikan data data successLogin sesuai dengan yang diharapkan
+       * Memastikan data userId sesuai dengan yang diharapkan
+
+	B. Ketika Login Error Pengguna Tidak Ditemukan, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText tidak null
+       * Memastikan data errorText sesuai dengan yang diharapkan
+
+	C. Ketika Login Error Email tidak valid, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText tidak null
+       * Memastikan data errorText sesuai dengan yang diharapkan
+
+	D. Ketika Login Error Password tidak valid, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText tidak null
+       * Memastikan data errorText sesuai dengan yang diharapkan
+
+3. RegisterViewModelTest
+	A. Ketika Register Berhasil, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText bernilai empty
+       * Memastikan data successText sesuai dengan yang diharapkan
+
+	B. Ketika Register Error Email tidak valid, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText tidak null
+       * Memastikan data errorText sesuai dengan yang diharapkan
+
+	C. Ketika Register Error Email sudah ada yang punya, LiveData dalam kondisi yang benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText tidak null
+       * Memastikan data errorText sesuai dengan yang diharapkan
+
+4. AddStoryViewModelTest
+	A. Ketika Add Story Sukses, LiveData dalam kondisi benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText bernilai empty
+       * Memastikan data isSuccess bernilai True
+
+	B. Ketika Add Story Error, LiveData dalam kondisi benar
+       * Memastikan IsLoading bernilai False
+       * Memastikan data errorText tidak null
+       * Memastikan data errorText sesuai dengan yang diharapkan
+
+5. HomeViewModelTest
+	A. Ketika memuat daftar Cerita Harus Tidak Null dan return sukses
+       * Memastikan IsLoading bernilai False
+       * Memastikan data snapshot list story sesuai dengan yang diharapkan
+       * Memastikan jumlah data snapshot list story sesuai dengan yang diharapkan
+       * Memastikan data pertama id story sesuai dengan yang diharapkan
+
+	B. Ketika memuat daftar Cerita mengembalikan list Kosong
+       * Memastikan jumlah data snapshot list story berjumlah kosong
