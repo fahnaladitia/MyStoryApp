@@ -27,8 +27,13 @@ import com.pahnal.mystoryapp.presentation.story_features.home.adapter.ListStoryA
 import com.pahnal.mystoryapp.presentation.story_features.home.adapter.LoadingStateAdapter
 import com.pahnal.mystoryapp.presentation.story_features.maps_story_marker.MapsStoryMarkerActivity
 import com.pahnal.mystoryapp.presentation.story_features.story_detail.StoryDetailActivity
-import com.pahnal.mystoryapp.utils.*
+import com.pahnal.mystoryapp.utils.DataPref
+import com.pahnal.mystoryapp.utils.ViewModelFactory
+import com.pahnal.mystoryapp.utils.goTo
+import com.pahnal.mystoryapp.utils.toast
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 class HomeActivity : AppCompatActivity() {
@@ -117,6 +122,13 @@ class HomeActivity : AppCompatActivity() {
                     navigateToStoryDetail(story, itemBinding)
                 }
             }
+            lifecycleScope.launchWhenCreated {
+                adapter.loadStateFlow
+                    .distinctUntilChangedBy { it.refresh }
+                    .filter { it.refresh is LoadState.NotLoading }
+                    .collect { binding.rvStory.scrollToPosition(0) }
+            }
+
             adapter.addLoadStateListener {
                 val isRefreshLoading = it.refresh is LoadState.Loading
                 val isRefreshError = it.refresh is LoadState.Error
@@ -161,10 +173,8 @@ class HomeActivity : AppCompatActivity() {
             val data = activityResult.data?.getBooleanExtra(EXTRA_IS_RELOAD, false)
             if (data == true) {
                 if (this::adapter.isInitialized) {
-                    binding.rvStory.scrollToPosition(0)
                     adapter.refresh()
                 }
-
             }
         }
     }
